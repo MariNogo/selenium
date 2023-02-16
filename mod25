@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 from settings import valid_email, valid_password
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -67,8 +66,6 @@ def test_list_my_pets():
     # Составляем список питомцев и заодно считаем количество питомцев с фотографиями
     list_of_my_pets = []
     pets_with_photo_number = 0
-    # Поскольку всю таблицу с питомцами мы уже дождались, тут можно обойтись без явных ожиданий
-    # Обращаться за каждым элементом на сайт - убогое решение, полюбому можно вытащить строку целиком и уже локально её парсить, но я пока так не умею :(
     for i in range(pets_in_table_number):
         photo = pytest.driver.find_element('xpath', f'// *[ @ id = "all_my_pets"] / table / tbody / tr[{i+1}] / th / img')
         name = pytest.driver.find_element('xpath', f'// *[ @ id = "all_my_pets"] / table / tbody / tr[{i+1}] / td[1]').text
